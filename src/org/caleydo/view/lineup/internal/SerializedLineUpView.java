@@ -12,9 +12,9 @@ import org.caleydo.core.serialize.ASerializedMultiTablePerspectiveBasedView;
 import org.caleydo.core.view.IMultiTablePerspectiveBasedView;
 
 /**
- * Serialized <INSERT VIEW NAME> view.
  *
- * @author <INSERT_YOUR_NAME>
+ * @author Samuel Gratzl
+ * 
  */
 @XmlRootElement
 @XmlType
@@ -26,9 +26,6 @@ public class SerializedLineUpView extends ASerializedMultiTablePerspectiveBasedV
 	public SerializedLineUpView() {
 	}
 
-	/**
-	 * @param glLineUpView
-	 */
 	public SerializedLineUpView(IMultiTablePerspectiveBasedView view) {
 		super(view);
 	}

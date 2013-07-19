@@ -9,9 +9,9 @@ import org.caleydo.core.view.ARcpGLViewPart;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * TODO: DOCUMENT ME!
  *
- * @author <INSERT_YOUR_NAME>
+ * @author Samuel Gratzl
+ * 
  */
 public class RcpGLLineUpView extends ARcpGLViewPart {
 

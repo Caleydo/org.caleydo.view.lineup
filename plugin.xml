@@ -9,7 +9,7 @@
             class="org.caleydo.view.lineup.internal.RcpGLLineUpView"
             icon="resources/icons/icon.png"
             id="org.caleydo.view.lineup"
-            name="lineup">
+            name="LineUp Ranking">
       </view>
    </extension>
    <extension
