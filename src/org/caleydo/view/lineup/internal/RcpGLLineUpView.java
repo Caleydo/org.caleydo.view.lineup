@@ -3,7 +3,7 @@
  * Copyright (c) The Caleydo Team. All rights reserved.
  * Licensed under the new BSD license, available at http://caleydo.org/license
  ******************************************************************************/
-package org.caleydo.view.template;
+package org.caleydo.view.lineup.internal;
 
 import org.caleydo.core.view.ARcpGLViewPart;
 import org.eclipse.swt.widgets.Composite;
@@ -13,33 +13,33 @@ import org.eclipse.swt.widgets.Composite;
  *
  * @author <INSERT_YOUR_NAME>
  */
-public class RcpGLTemplateView extends ARcpGLViewPart {
+public class RcpGLLineUpView extends ARcpGLViewPart {
 
 	/**
 	 * Constructor.
 	 */
-	public RcpGLTemplateView() {
-		super(SerializedTemplateView.class);
+	public RcpGLLineUpView() {
+		super(SerializedLineUpView.class);
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
 
-		view = new GLTemplateView(glCanvas);
+		view = new GLLineUpView(glCanvas);
 		initializeView();
 		createPartControlGL();
 	}
 
 	@Override
 	public void createDefaultSerializedView() {
-		serializedView = new SerializedTemplateView();
+		serializedView = new SerializedLineUpView();
 		determineDataConfiguration(serializedView);
 	}
 
 	@Override
 	public String getViewGUIID() {
-		return GLTemplateView.VIEW_TYPE;
+		return GLLineUpView.VIEW_TYPE;
 	}
 
 }

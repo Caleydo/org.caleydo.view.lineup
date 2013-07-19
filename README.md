@@ -1,2 +1,2 @@
-org.caleydo.view.template
+org.caleydo.view.lineup
 =========================

@@ -3,12 +3,13 @@
  * Copyright (c) The Caleydo Team. All rights reserved.
  * Licensed under the new BSD license, available at http://caleydo.org/license
  ******************************************************************************/
-package org.caleydo.view.template;
+package org.caleydo.view.lineup.internal;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.caleydo.core.serialize.ASerializedSingleTablePerspectiveBasedView;
+import org.caleydo.core.serialize.ASerializedMultiTablePerspectiveBasedView;
+import org.caleydo.core.view.IMultiTablePerspectiveBasedView;
 
 /**
  * Serialized <INSERT VIEW NAME> view.
@@ -17,16 +18,23 @@ import org.caleydo.core.serialize.ASerializedSingleTablePerspectiveBasedView;
  */
 @XmlRootElement
 @XmlType
-public class SerializedTemplateView extends ASerializedSingleTablePerspectiveBasedView {
+public class SerializedLineUpView extends ASerializedMultiTablePerspectiveBasedView {
 
 	/**
 	 * Default constructor with default initialization
 	 */
-	public SerializedTemplateView() {
+	public SerializedLineUpView() {
+	}
+
+	/**
+	 * @param glLineUpView
+	 */
+	public SerializedLineUpView(IMultiTablePerspectiveBasedView view) {
+		super(view);
 	}
 
 	@Override
 	public String getViewType() {
-		return GLTemplateView.VIEW_TYPE;
+		return GLLineUpView.VIEW_TYPE;
 	}
 }

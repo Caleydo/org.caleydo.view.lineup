@@ -3,7 +3,7 @@
  * Copyright (c) The Caleydo Team. All rights reserved.
  * Licensed under the new BSD license, available at http://caleydo.org/license
  ******************************************************************************/
-package org.caleydo.view.template;
+package org.caleydo.view.lineup.internal.ui;
 
 import org.caleydo.core.data.perspective.table.TablePerspective;
 import org.caleydo.core.data.selection.SelectionManager;
@@ -11,6 +11,7 @@ import org.caleydo.core.data.selection.TablePerspectiveSelectionMixin;
 import org.caleydo.core.event.EventListenerManager.DeepScan;
 import org.caleydo.core.view.opengl.layout2.GLElement;
 import org.caleydo.core.view.opengl.layout2.GLGraphics;
+import org.caleydo.view.lineup.internal.Activator;
 
 /**
  * the root element of this view holding a {@link TablePerspective}
@@ -18,14 +19,14 @@ import org.caleydo.core.view.opengl.layout2.GLGraphics;
  * @author Samuel Gratzl
  * 
  */
-public class TemplateElement extends GLElement implements TablePerspectiveSelectionMixin.ITablePerspectiveMixinCallback {
+public class LineUpElement extends GLElement implements TablePerspectiveSelectionMixin.ITablePerspectiveMixinCallback {
 
 	private final TablePerspective tablePerspective;
 
 	@DeepScan
 	private final TablePerspectiveSelectionMixin selection;
 
-	public TemplateElement(TablePerspective tablePerspective) {
+	public LineUpElement(TablePerspective tablePerspective) {
 		this.tablePerspective = tablePerspective;
 		this.selection = new TablePerspectiveSelectionMixin(tablePerspective, this);
 	}

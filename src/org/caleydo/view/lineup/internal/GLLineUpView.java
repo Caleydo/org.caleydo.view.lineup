@@ -3,7 +3,9 @@
  * Copyright (c) The Caleydo Team. All rights reserved.
  * Licensed under the new BSD license, available at http://caleydo.org/license
  ******************************************************************************/
-package org.caleydo.view.template;
+package org.caleydo.view.lineup.internal;
+
+import java.util.List;
 
 import org.caleydo.core.data.datadomain.DataSupportDefinitions;
 import org.caleydo.core.data.datadomain.IDataSupportDefinition;
@@ -12,19 +14,20 @@ import org.caleydo.core.serialize.ASerializedView;
 import org.caleydo.core.view.opengl.canvas.IGLCanvas;
 import org.caleydo.core.view.opengl.layout2.AGLElementDecorator;
 import org.caleydo.core.view.opengl.layout2.GLElement;
+import org.caleydo.core.view.opengl.layout2.view.AMultiTablePerspectiveElementView;
 import org.caleydo.core.view.opengl.layout2.view.ASingleTablePerspectiveElementView;
 
 /**
  * basic view based on {@link GLElement} with a {@link ASingleTablePerspectiveElementView}
- * 
+ *
  * @author Samuel Gratzl
- * 
+ *
  */
-public class GLTemplateView extends ASingleTablePerspectiveElementView {
-	public static final String VIEW_TYPE = "org.caleydo.view.template";
-	public static final String VIEW_NAME = "View Template";
+public class GLLineUpView extends AMultiTablePerspectiveElementView {
+	public static final String VIEW_TYPE = "org.caleydo.view.line";
+	public static final String VIEW_NAME = "LineUP";
 
-	public GLTemplateView(IGLCanvas glCanvas) {
+	public GLLineUpView(IGLCanvas glCanvas) {
 		super(glCanvas, VIEW_TYPE, VIEW_NAME);
 	}
 
@@ -35,7 +38,7 @@ public class GLTemplateView extends ASingleTablePerspectiveElementView {
 
 	@Override
 	public ASerializedView getSerializableRepresentation() {
-		SerializedTemplateView serializedForm = new SerializedTemplateView();
+		SerializedLineUpView serializedForm = new SerializedLineUpView(this);
 		serializedForm.setViewID(this.getID());
 		return serializedForm;
 	}
@@ -46,12 +49,12 @@ public class GLTemplateView extends ASingleTablePerspectiveElementView {
 	}
 
 	@Override
-	protected void applyTablePerspective(AGLElementDecorator root, TablePerspective tablePerspective) {
-		if (tablePerspective == null)
-			root.setContent(null);
-		else
-			root.setContent(new TemplateElement(tablePerspective));
+	protected void applyTablePerspectives(AGLElementDecorator root, List<TablePerspective> all,
+			List<TablePerspective> added, List<TablePerspective> removed) {
+		// TODO Auto-generated method stub
+
 	}
+
 
 
 }
