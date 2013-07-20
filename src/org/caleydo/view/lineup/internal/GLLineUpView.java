@@ -16,11 +16,12 @@ import org.caleydo.core.serialize.ASerializedView;
 import org.caleydo.core.util.logging.Logger;
 import org.caleydo.core.view.opengl.canvas.IGLCanvas;
 import org.caleydo.core.view.opengl.layout.Column.VAlign;
-import org.caleydo.core.view.opengl.layout2.AGLElementDecorator;
 import org.caleydo.core.view.opengl.layout2.GLElement;
+import org.caleydo.core.view.opengl.layout2.GLElementDecorator;
 import org.caleydo.core.view.opengl.layout2.renderer.GLRenderers;
 import org.caleydo.core.view.opengl.layout2.view.AMultiTablePerspectiveElementView;
 import org.caleydo.core.view.opengl.layout2.view.ASingleTablePerspectiveElementView;
+import org.caleydo.view.lineup.internal.serial.SerializedLineUpView;
 import org.caleydo.vis.rank.config.RankTableConfigBase;
 import org.caleydo.vis.rank.config.RankTableUIConfigs;
 import org.caleydo.vis.rank.layout.RowHeightLayouts;
@@ -88,7 +89,7 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 	}
 
 	@Override
-	protected void applyTablePerspectives(AGLElementDecorator root, List<TablePerspective> all,
+	protected void applyTablePerspectives(GLElementDecorator root, List<TablePerspective> all,
 			List<TablePerspective> added, List<TablePerspective> removed) {
 		// TODO Auto-generated method stub
 

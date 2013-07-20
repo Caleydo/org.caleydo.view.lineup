@@ -9,6 +9,6 @@ import org.caleydo.core.gui.command.AOpenViewHandler;
 
 public class OpenViewHandler extends AOpenViewHandler {
 	public OpenViewHandler() {
-		super(GLLineUpView.VIEW_TYPE, true);
+		super(GLLineUpView.VIEW_TYPE, MULTIPLE);
 	}
 }

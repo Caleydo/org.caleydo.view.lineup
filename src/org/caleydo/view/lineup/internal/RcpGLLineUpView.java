@@ -5,38 +5,26 @@
  ******************************************************************************/
 package org.caleydo.view.lineup.internal;
 
-import org.caleydo.core.view.ARcpGLViewPart;
-import org.eclipse.swt.widgets.Composite;
+import org.caleydo.core.view.ARcpGLElementViewPart;
+import org.caleydo.core.view.opengl.canvas.IGLCanvas;
+import org.caleydo.core.view.opengl.layout2.AGLElementView;
+import org.caleydo.view.lineup.internal.serial.SerializedLineUpView;
 
 /**
  *
  * @author Samuel Gratzl
- * 
+ *
  */
-public class RcpGLLineUpView extends ARcpGLViewPart {
+public class RcpGLLineUpView extends ARcpGLElementViewPart {
 
-	/**
-	 * Constructor.
-	 */
 	public RcpGLLineUpView() {
 		super(SerializedLineUpView.class);
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
-		super.createPartControl(parent);
-
-		view = new GLLineUpView(glCanvas);
-		initializeView();
-		createPartControlGL();
+	protected AGLElementView createView(IGLCanvas canvas) {
+		return new GLLineUpView(canvas);
 	}
-
-	@Override
-	public void createDefaultSerializedView() {
-		serializedView = new SerializedLineUpView();
-		determineDataConfiguration(serializedView);
-	}
-
 	@Override
 	public String getViewGUIID() {
 		return GLLineUpView.VIEW_TYPE;
