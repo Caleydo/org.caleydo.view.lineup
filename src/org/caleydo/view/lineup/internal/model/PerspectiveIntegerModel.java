@@ -22,7 +22,8 @@ public class PerspectiveIntegerModel extends IntegerRankColumnModel implements I
 	private final Perspective perspective;
 
 	public PerspectiveIntegerModel(Perspective perspective, Color color) {
-		super(new HeaderRenderer(perspective), new IntDataAdapter(perspective), color, color.brighter(), NumberFormat
+		super(new HeaderRenderer(perspective), new IntDataAdapter(perspective), color, new Color(.95f, .95f, .95f),
+				NumberFormat
 				.getInstance(Locale.ENGLISH));
 		this.perspective = perspective;
 	}

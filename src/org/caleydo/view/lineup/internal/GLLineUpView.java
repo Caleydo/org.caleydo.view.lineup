@@ -5,6 +5,8 @@
  ******************************************************************************/
 package org.caleydo.view.lineup.internal;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -65,6 +67,13 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 		this.table.add(new RankRankColumnModel());
 		this.table.add(new StringRankColumnModel(GLRenderers.drawText("Label", VAlign.CENTER),
 				StringRankColumnModel.DEFAULT));
+		this.table.addPropertyChangeListener(RankTableModel.PROP_DESTROYED, new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				ARankColumnModel m = (ARankColumnModel) evt.getOldValue();
+				onDestroyed(m);
+			}
+		});
 
 		configurer = new ConfigurerPopup(this);
 	}
@@ -112,6 +121,15 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 				removeTablePerspective(t);
 				break;
 			}
+		}
+	}
+
+	/**
+	 * @param m
+	 */
+	protected void onDestroyed(ARankColumnModel m) {
+		if (m instanceof IPerspectiveColumn) {
+			onRemovePerspective(new RemovePerspectiveEvent(((IPerspectiveColumn) m).getPerspective()));
 		}
 	}
 

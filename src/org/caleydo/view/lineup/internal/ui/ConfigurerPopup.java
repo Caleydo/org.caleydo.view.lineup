@@ -27,6 +27,7 @@ import org.caleydo.core.view.opengl.layout2.basic.GLButton.ISelectionCallback;
 import org.caleydo.core.view.opengl.layout2.basic.GLComboBox;
 import org.caleydo.core.view.opengl.layout2.geom.Rect;
 import org.caleydo.core.view.opengl.layout2.layout.GLLayouts;
+import org.caleydo.core.view.opengl.layout2.layout.GLPadding;
 import org.caleydo.core.view.opengl.layout2.renderer.GLRenderers;
 import org.caleydo.view.lineup.internal.Resources;
 import org.caleydo.view.lineup.internal.event.AddColumnEvent;
@@ -75,8 +76,10 @@ public class ConfigurerPopup extends GLElementContainer {
 		}
 
 		if (size() > 1 && getParent() == null && context != null) {
-			context.getPopupLayer().show(this, new Rect(Float.NaN, Float.NaN, 430, size() * 30),
+			context.getPopupLayer().show(this, new Rect(Float.NaN, Float.NaN, 410, size() * 30),
 					IPopupLayer.FLAG_ALL & ~IPopupLayer.FLAG_CLOSEABLE);
+		} else {
+			setSize(getSize().x(), size() * 30);
 		}
 	}
 
@@ -217,7 +220,7 @@ public class ConfigurerPopup extends GLElementContainer {
 		 */
 		public HeaderRow() {
 			super(GLLayouts.flowHorizontal(5));
-			this.add(new GLElement(GLRenderers.drawText("Name", VAlign.CENTER)).setSize(200, -1));
+			this.add(new GLElement(GLRenderers.drawText("Name", VAlign.CENTER)).setSize(180, -1));
 			this.add(new GLElement(GLRenderers.drawText("Type", VAlign.CENTER)).setSize(100, -1));
 			this.add(new GLElement(GLRenderers.drawText("Color", VAlign.CENTER)).setSize(100, -1));
 			// this.add(new GLElement(GLRenderers.drawText("Color",VAlign.CENTER)).setSize(100, -1));
@@ -240,11 +243,12 @@ public class ConfigurerPopup extends GLElementContainer {
 		public ConfigurePerspectiveElement(TablePerspective tablePerspective, List<EModelType> types) {
 			super(GLLayouts.flowHorizontal(5));
 			this.tablePerspective = tablePerspective;
-			this.add(new GLElement(GLRenderers.drawText(tablePerspective.getLabel())).setSize(200, -1));
+			this.add(new GLElement(GLRenderers.drawText(tablePerspective.getLabel(), VAlign.LEFT, new GLPadding(5, 2)))
+					.setSize(180, -1));
 			typeUI = new GLComboBox<>(types, GLComboBox.DEFAULT, GLRenderers.fillRect(Color.WHITE));
 			typeUI.setSelected(0);
 			this.add(typeUI.setSize(100, -1));
-			colorUI = new ColorChooserButton(Color.NEUTRAL_GREY);
+			colorUI = new ColorChooserButton(Color.GRAY);
 			this.add(colorUI.setSize(100, -1));
 			this.add(new GLButton().setCallback(this).setRenderer(GLRenderers.fillImage(Resources.ICON_ADD))
 					.setSize(16, -1));

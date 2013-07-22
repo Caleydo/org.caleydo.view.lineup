@@ -26,7 +26,9 @@ public class PerspectiveFloatModel extends FloatRankColumnModel implements IPers
 	public PerspectiveFloatModel(Perspective perspective, Color color, PiecewiseMapping mapping,
 			IFloatInferrer missingValue) {
 		super(new FloatDataAdapter(perspective), new HeaderRenderer(perspective), color,
-				color.brighter(), mapping, missingValue,
+ new Color(.95f, .95f, .95f),
+				mapping,
+				missingValue,
 				NumberFormat.getInstance(Locale.ENGLISH));
 		this.perspective = perspective;
 	}

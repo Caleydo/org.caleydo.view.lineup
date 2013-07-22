@@ -58,6 +58,14 @@ public class ColorChooserButton extends GLButton implements IGLRenderer, GLButto
 		return color;
 	}
 
+	/**
+	 * @param color
+	 *            setter, see {@link color}
+	 */
+	public void setColor(Color color) {
+		this.color = color;
+		repaint();
+	}
 
 	@Override
 	public void render(GLGraphics g, float w, float h, GLElement parent) {

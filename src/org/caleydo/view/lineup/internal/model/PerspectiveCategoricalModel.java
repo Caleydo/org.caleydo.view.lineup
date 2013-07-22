@@ -25,8 +25,7 @@ public class PerspectiveCategoricalModel<T extends Comparable<T>> extends MultiC
 
 	public PerspectiveCategoricalModel(Perspective perspective, Function<IRow, Set<T>> data, Map<T, String> metaData,
 			Color color) {
-		super(new HeaderRenderer(perspective), data, metaData, color, color
-				.brighter(), "");
+		super(new HeaderRenderer(perspective), data, metaData, color, new Color(.95f, .95f, .95f), "");
 		this.perspective = perspective;
 	}
 
