@@ -5,13 +5,17 @@
  ******************************************************************************/
 package org.caleydo.view.lineup.internal;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import javax.media.opengl.GLAutoDrawable;
-
+import org.caleydo.core.data.datadomain.ATableBasedDataDomain;
 import org.caleydo.core.data.datadomain.DataSupportDefinitions;
 import org.caleydo.core.data.datadomain.IDataSupportDefinition;
 import org.caleydo.core.data.perspective.table.TablePerspective;
+import org.caleydo.core.data.perspective.variable.Perspective;
+import org.caleydo.core.event.EventListenerManager.ListenTo;
+import org.caleydo.core.id.IDType;
 import org.caleydo.core.serialize.ASerializedView;
 import org.caleydo.core.util.logging.Logger;
 import org.caleydo.core.view.opengl.canvas.IGLCanvas;
@@ -21,15 +25,24 @@ import org.caleydo.core.view.opengl.layout2.GLElementDecorator;
 import org.caleydo.core.view.opengl.layout2.renderer.GLRenderers;
 import org.caleydo.core.view.opengl.layout2.view.AMultiTablePerspectiveElementView;
 import org.caleydo.core.view.opengl.layout2.view.ASingleTablePerspectiveElementView;
+import org.caleydo.view.lineup.internal.event.AddColumnEvent;
+import org.caleydo.view.lineup.internal.event.RemovePerspectiveEvent;
+import org.caleydo.view.lineup.internal.model.IDRow;
+import org.caleydo.view.lineup.internal.model.IPerspectiveColumn;
 import org.caleydo.view.lineup.internal.serial.SerializedLineUpView;
+import org.caleydo.view.lineup.internal.ui.ConfigurerPopup;
 import org.caleydo.vis.rank.config.RankTableConfigBase;
 import org.caleydo.vis.rank.config.RankTableUIConfigs;
 import org.caleydo.vis.rank.layout.RowHeightLayouts;
+import org.caleydo.vis.rank.model.ARankColumnModel;
 import org.caleydo.vis.rank.model.RankRankColumnModel;
 import org.caleydo.vis.rank.model.RankTableModel;
 import org.caleydo.vis.rank.model.StringRankColumnModel;
 import org.caleydo.vis.rank.ui.RankTableUI;
 import org.caleydo.vis.rank.ui.RankTableUIMouseKeyListener;
+
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 
 /**
  * basic view based on {@link GLElement} with a {@link ASingleTablePerspectiveElementView}
@@ -43,6 +56,7 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 	public static final String VIEW_NAME = "LineUp";
 
 	private final RankTableModel table;
+	private final ConfigurerPopup configurer;
 
 	public GLLineUpView(IGLCanvas glCanvas) {
 		super(glCanvas, VIEW_TYPE, VIEW_NAME);
@@ -51,6 +65,8 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 		this.table.add(new RankRankColumnModel());
 		this.table.add(new StringRankColumnModel(GLRenderers.drawText("Label", VAlign.CENTER),
 				StringRankColumnModel.DEFAULT));
+
+		configurer = new ConfigurerPopup(this);
 	}
 
 	@Override
@@ -66,8 +82,8 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 	}
 
 	@Override
-	public void init(GLAutoDrawable drawable) {
-		super.init(drawable);
+	protected void initScene() {
+		super.initScene();
 
 		RankTableUI root = new RankTableUI();
 		root.init(table, RankTableUIConfigs.DEFAULT, RowHeightLayouts.UNIFORM, RowHeightLayouts.FISH_EYE);
@@ -79,22 +95,67 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 	}
 
 	@Override
-	public void dispose(GLAutoDrawable drawable) {
-		super.dispose(drawable);
-	}
-
-	@Override
 	protected RankTableUI getContent() {
 		return (RankTableUI) super.getContent();
+	}
+
+	@ListenTo(sendToMe = true)
+	private void onAddColumn(AddColumnEvent event) {
+		table.add(event.getModel());
+	}
+
+	@ListenTo(sendToMe = true)
+	private void onRemovePerspective(RemovePerspectiveEvent event) {
+		Perspective perspective = event.getPerspective();
+		for (TablePerspective t : this.getTablePerspectives()) {
+			if (t.getDimensionPerspective().equals(perspective) || t.getRecordPerspective().equals(perspective)) {
+				removeTablePerspective(t);
+				break;
+			}
+		}
 	}
 
 	@Override
 	protected void applyTablePerspectives(GLElementDecorator root, List<TablePerspective> all,
 			List<TablePerspective> added, List<TablePerspective> removed) {
-		// TODO Auto-generated method stub
+		if (table.getDataSize() == 0 && !added.isEmpty()) {
+			TablePerspective first = added.get(0);
+			initRecords(first.getRecordPerspective());
+		}
+		configurer.addAll(added, this);
+		configurer.removed(removed);
 
+		if (!removed.isEmpty()) {
+			Builder<Perspective> builder = ImmutableSet.builder();
+			for(TablePerspective p : removed) {
+				builder.add(p.getDimensionPerspective());
+				builder.add(p.getRecordPerspective());
+			}
+			Set<Perspective> toRemove = builder.build();
+
+			List<ARankColumnModel> toHide = new ArrayList<>();
+			for (ARankColumnModel r : table.getFlatColumns()) {
+				if (r instanceof IPerspectiveColumn && toRemove.contains(((IPerspectiveColumn) r).getPerspective()))
+					toHide.add(r);
+			}
+			for (ARankColumnModel r : toHide) {
+				if (!r.destroy() && !r.hide()) {
+					log.warn("can't remove: " + r);
+				}
+			}
+		}
 	}
 
 
+	private void initRecords(Perspective recordPerspective) {
+		IDType type = recordPerspective.getIdType();
+		List<IDRow> data = new ArrayList<>();
+		ATableBasedDataDomain d = (ATableBasedDataDomain) recordPerspective.getDataDomain();
+		for(Integer id : recordPerspective.getVirtualArray()) {
+			data.add(new IDRow(type, id, d.getRecordLabel(id)));
+		}
+		table.addData(data);
+		configurer.setDataType(type);
+	}
 
 }

@@ -9,7 +9,7 @@
             class="org.caleydo.view.lineup.internal.RcpGLLineUpView"
             icon="resources/icons/icon.png"
             id="org.caleydo.view.lineup"
-            name="LineUp Ranking">
+            name="LineUp">
       </view>
    </extension>
    <extension
@@ -45,7 +45,7 @@
       <command
             defaultHandler="org.caleydo.view.lineup.internal.OpenViewHandler"
             id="org.caleydo.view.lineup.command.openlineup"
-            name="lineup">
+            name="LineUp">
       </command>
    </extension>
    <extension
