@@ -81,7 +81,6 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 	@Override
 	public ASerializedView getSerializableRepresentation() {
 		SerializedLineUpView serializedForm = new SerializedLineUpView(this);
-		serializedForm.setViewID(this.getID());
 		return serializedForm;
 	}
 

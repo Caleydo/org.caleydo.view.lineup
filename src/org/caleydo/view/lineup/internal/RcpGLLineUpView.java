@@ -25,9 +25,4 @@ public class RcpGLLineUpView extends ARcpGLElementViewPart {
 	protected AGLElementView createView(IGLCanvas canvas) {
 		return new GLLineUpView(canvas);
 	}
-	@Override
-	public String getViewGUIID() {
-		return GLLineUpView.VIEW_TYPE;
-	}
-
 }
