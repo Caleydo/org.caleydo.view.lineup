@@ -18,9 +18,9 @@ import org.caleydo.core.util.execution.SafeCallable;
 import org.caleydo.core.view.opengl.canvas.GLContextLocal;
 import org.caleydo.vis.rank.model.ARow;
 
-import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -34,10 +34,10 @@ public class IDRow extends ARow implements ILabeled {
 	/**
 	 * shared cache id {@link IIDTypeMapper}
 	 */
-	private final GLContextLocal<Cache<IDType, IIDTypeMapper<Integer, Integer>>> mappers = GLContextLocal
-			.getOrCreateShared("rowmapper", new SafeCallable<Cache<IDType, IIDTypeMapper<Integer, Integer>>>() {
+	private final GLContextLocal<LoadingCache<IDType, IIDTypeMapper<Integer, Integer>>> mappers = GLContextLocal
+			.getOrCreateShared("rowmapper", new SafeCallable<LoadingCache<IDType, IIDTypeMapper<Integer, Integer>>>() {
 				@Override
-				public Cache<IDType, IIDTypeMapper<Integer, Integer>> call() {
+				public LoadingCache<IDType, IIDTypeMapper<Integer, Integer>> call() {
 					final IDMappingManager m = IDMappingManagerRegistry.get().getIDMappingManager(idType);
 					return CacheBuilder.newBuilder().initialCapacity(5)
 							.build(new CacheLoader<IDType, IIDTypeMapper<Integer, Integer>>() {
@@ -52,7 +52,7 @@ public class IDRow extends ARow implements ILabeled {
 	/**
 	 * cache of foreign ids
 	 */
-	private final Cache<IDType, Set<Integer>> foreignIds = CacheBuilder.newBuilder().initialCapacity(5)
+	private final LoadingCache<IDType, Set<Integer>> foreignIds = CacheBuilder.newBuilder().initialCapacity(5)
 			.build(new CacheLoader<IDType, Set<Integer>>() {
 				@Override
 				public Set<Integer> load(IDType arg0) throws Exception {
