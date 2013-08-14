@@ -10,8 +10,8 @@ import java.util.Set;
 
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.util.color.Color;
-import org.caleydo.vis.rank.model.IRow;
-import org.caleydo.vis.rank.model.MultiCategoricalRankColumnModel;
+import org.caleydo.vis.lineup.model.IRow;
+import org.caleydo.vis.lineup.model.MultiCategoricalRankColumnModel;
 
 import com.google.common.base.Function;
 

@@ -9,7 +9,7 @@ import org.caleydo.core.data.datadomain.ATableBasedDataDomain;
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.id.IDType;
 import org.caleydo.view.lineup.internal.model.IDRow;
-import org.caleydo.vis.rank.model.IRow;
+import org.caleydo.vis.lineup.model.IRow;
 
 import com.google.common.base.Function;
 

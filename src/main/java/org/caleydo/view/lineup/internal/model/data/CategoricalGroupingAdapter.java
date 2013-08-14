@@ -13,7 +13,7 @@ import org.caleydo.core.data.virtualarray.VirtualArray;
 import org.caleydo.core.data.virtualarray.group.Group;
 import org.caleydo.core.id.IDType;
 import org.caleydo.view.lineup.internal.model.IDRow;
-import org.caleydo.vis.rank.model.IRow;
+import org.caleydo.vis.lineup.model.IRow;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;

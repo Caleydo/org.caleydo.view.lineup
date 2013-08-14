@@ -16,7 +16,7 @@ import org.caleydo.core.id.IIDTypeMapper;
 import org.caleydo.core.util.base.ILabeled;
 import org.caleydo.core.util.execution.SafeCallable;
 import org.caleydo.core.view.opengl.canvas.GLContextLocal;
-import org.caleydo.vis.rank.model.ARow;
+import org.caleydo.vis.lineup.model.ARow;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

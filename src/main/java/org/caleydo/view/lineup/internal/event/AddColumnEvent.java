@@ -6,7 +6,7 @@
 package org.caleydo.view.lineup.internal.event;
 
 import org.caleydo.core.event.ADirectedEvent;
-import org.caleydo.vis.rank.model.ARankColumnModel;
+import org.caleydo.vis.lineup.model.ARankColumnModel;
 
 /**
  * @author Samuel Gratzl

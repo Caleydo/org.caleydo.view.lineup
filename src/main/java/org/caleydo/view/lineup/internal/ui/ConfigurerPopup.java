@@ -36,9 +36,9 @@ import org.caleydo.view.lineup.internal.model.PerspectiveFloatModel;
 import org.caleydo.view.lineup.internal.model.PerspectiveIntegerModel;
 import org.caleydo.view.lineup.internal.model.data.CategoricalDataAdapter;
 import org.caleydo.view.lineup.internal.model.data.CategoricalGroupingAdapter;
-import org.caleydo.vis.rank.data.FloatInferrers;
-import org.caleydo.vis.rank.model.ARankColumnModel;
-import org.caleydo.vis.rank.model.mapping.PiecewiseMapping;
+import org.caleydo.vis.lineup.data.FloatInferrers;
+import org.caleydo.vis.lineup.model.ARankColumnModel;
+import org.caleydo.vis.lineup.model.mapping.PiecewiseMapping;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;

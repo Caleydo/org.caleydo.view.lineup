@@ -11,9 +11,9 @@ import java.util.Locale;
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.util.color.Color;
 import org.caleydo.view.lineup.internal.model.data.FloatDataAdapter;
-import org.caleydo.vis.rank.data.IFloatInferrer;
-import org.caleydo.vis.rank.model.FloatRankColumnModel;
-import org.caleydo.vis.rank.model.mapping.PiecewiseMapping;
+import org.caleydo.vis.lineup.data.IFloatInferrer;
+import org.caleydo.vis.lineup.model.FloatRankColumnModel;
+import org.caleydo.vis.lineup.model.mapping.PiecewiseMapping;
 
 /**
  * @author Samuel Gratzl

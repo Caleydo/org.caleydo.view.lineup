@@ -11,7 +11,7 @@ import java.util.Locale;
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.util.color.Color;
 import org.caleydo.view.lineup.internal.model.data.IntDataAdapter;
-import org.caleydo.vis.rank.model.IntegerRankColumnModel;
+import org.caleydo.vis.lineup.model.IntegerRankColumnModel;
 
 /**
  * @author Samuel Gratzl
