@@ -9,20 +9,20 @@ import org.caleydo.core.data.datadomain.ATableBasedDataDomain;
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.id.IDType;
 import org.caleydo.view.lineup.internal.model.IDRow;
-import org.caleydo.vis.lineup.data.AFloatFunction;
+import org.caleydo.vis.lineup.data.ADoubleFunction;
 import org.caleydo.vis.lineup.model.IRow;
 
 /**
  * @author Samuel Gratzl
  *
  */
-public class FloatDataAdapter extends AFloatFunction<IRow> {
+public class DoubleDataAdapter extends ADoubleFunction<IRow> {
 	private final IDType colType;
 	private final Iterable<Integer> cols;
 	private final IDType rowType;
 	private final ATableBasedDataDomain dataDomain;
 
-	public FloatDataAdapter(Perspective column) {
+	public DoubleDataAdapter(Perspective column) {
 		this.cols = column.getVirtualArray();
 		this.colType = column.getIdType();
 		ATableBasedDataDomain d = (ATableBasedDataDomain) column.getDataDomain();
@@ -31,9 +31,9 @@ public class FloatDataAdapter extends AFloatFunction<IRow> {
 	}
 
 	@Override
-	public float applyPrimitive(IRow in) {
+	public double applyPrimitive(IRow in) {
 		IDRow r = (IDRow) in;
-		float s = 0;
+		double s = 0;
 		int c = 0;
 		for (Integer id : r.getIDAs(rowType)) {
 			for (Integer col : cols) {
@@ -48,6 +48,6 @@ public class FloatDataAdapter extends AFloatFunction<IRow> {
 				}
 			}
 		}
-		return c == 0 ? Float.NaN : s / c;
+		return c == 0 ? Double.NaN : s / c;
 	}
 }

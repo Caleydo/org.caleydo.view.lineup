@@ -36,7 +36,7 @@ import org.caleydo.view.lineup.internal.model.PerspectiveFloatModel;
 import org.caleydo.view.lineup.internal.model.PerspectiveIntegerModel;
 import org.caleydo.view.lineup.internal.model.data.CategoricalDataAdapter;
 import org.caleydo.view.lineup.internal.model.data.CategoricalGroupingAdapter;
-import org.caleydo.vis.lineup.data.FloatInferrers;
+import org.caleydo.vis.lineup.data.DoubleInferrers;
 import org.caleydo.vis.lineup.model.ARankColumnModel;
 import org.caleydo.vis.lineup.model.mapping.PiecewiseMapping;
 
@@ -183,7 +183,7 @@ public class ConfigurerPopup extends GLElementContainer {
 					builder.build(),
 					color);
 		case AVERAGE_VALUE:
-			return new PerspectiveFloatModel(opposite, color, new PiecewiseMapping(0, 1), FloatInferrers.fix(Float.NaN));
+			return new PerspectiveFloatModel(opposite, color, new PiecewiseMapping(0, 1), DoubleInferrers.fix(Float.NaN));
 		case INTEGER_VALUE:
 			return new PerspectiveIntegerModel(opposite, color);
 		default:

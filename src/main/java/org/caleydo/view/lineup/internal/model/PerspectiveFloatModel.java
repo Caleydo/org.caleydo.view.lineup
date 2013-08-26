@@ -10,22 +10,22 @@ import java.util.Locale;
 
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.util.color.Color;
-import org.caleydo.view.lineup.internal.model.data.FloatDataAdapter;
-import org.caleydo.vis.lineup.data.IFloatInferrer;
-import org.caleydo.vis.lineup.model.FloatRankColumnModel;
+import org.caleydo.view.lineup.internal.model.data.DoubleDataAdapter;
+import org.caleydo.vis.lineup.data.IDoubleInferrer;
+import org.caleydo.vis.lineup.model.DoubleRankColumnModel;
 import org.caleydo.vis.lineup.model.mapping.PiecewiseMapping;
 
 /**
  * @author Samuel Gratzl
  *
  */
-public class PerspectiveFloatModel extends FloatRankColumnModel implements IPerspectiveColumn {
+public class PerspectiveFloatModel extends DoubleRankColumnModel implements IPerspectiveColumn {
 
 	private final Perspective perspective;
 
 	public PerspectiveFloatModel(Perspective perspective, Color color, PiecewiseMapping mapping,
-			IFloatInferrer missingValue) {
-		super(new FloatDataAdapter(perspective), new HeaderRenderer(perspective), color,
+			IDoubleInferrer missingValue) {
+		super(new DoubleDataAdapter(perspective), new HeaderRenderer(perspective), color,
  new Color(.95f, .95f, .95f),
 				mapping,
 				missingValue,
