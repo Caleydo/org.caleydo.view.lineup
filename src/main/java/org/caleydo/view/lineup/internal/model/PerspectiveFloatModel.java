@@ -5,9 +5,6 @@
  *******************************************************************************/
 package org.caleydo.view.lineup.internal.model;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import org.caleydo.core.data.perspective.variable.Perspective;
 import org.caleydo.core.util.color.Color;
 import org.caleydo.view.lineup.internal.model.data.DoubleDataAdapter;
@@ -29,7 +26,7 @@ public class PerspectiveFloatModel extends DoubleRankColumnModel implements IPer
  new Color(.95f, .95f, .95f),
 				mapping,
 				missingValue,
-				NumberFormat.getInstance(Locale.ENGLISH));
+ null);
 		this.perspective = perspective;
 	}
 
