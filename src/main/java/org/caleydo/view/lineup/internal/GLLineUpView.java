@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.media.opengl.GLAutoDrawable;
+
 import org.caleydo.core.data.datadomain.ATableBasedDataDomain;
 import org.caleydo.core.data.datadomain.DataSupportDefinitions;
 import org.caleydo.core.data.datadomain.IDataSupportDefinition;
@@ -20,7 +22,9 @@ import org.caleydo.core.event.EventListenerManager.ListenTo;
 import org.caleydo.core.id.IDType;
 import org.caleydo.core.serialize.ASerializedView;
 import org.caleydo.core.util.logging.Logger;
+import org.caleydo.core.view.opengl.canvas.GLThreadListenerWrapper;
 import org.caleydo.core.view.opengl.canvas.IGLCanvas;
+import org.caleydo.core.view.opengl.canvas.IGLKeyListener;
 import org.caleydo.core.view.opengl.layout.Column.VAlign;
 import org.caleydo.core.view.opengl.layout2.GLElement;
 import org.caleydo.core.view.opengl.layout2.GLElementDecorator;
@@ -40,8 +44,8 @@ import org.caleydo.vis.lineup.model.ARankColumnModel;
 import org.caleydo.vis.lineup.model.RankRankColumnModel;
 import org.caleydo.vis.lineup.model.RankTableModel;
 import org.caleydo.vis.lineup.model.StringRankColumnModel;
+import org.caleydo.vis.lineup.ui.RankTableKeyListener;
 import org.caleydo.vis.lineup.ui.RankTableUI;
-import org.caleydo.vis.lineup.ui.RankTableUIMouseKeyListener;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
@@ -59,6 +63,7 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 
 	private final RankTableModel table;
 	private final ConfigurerPopup configurer;
+	private IGLKeyListener keyListener;
 
 	public GLLineUpView(IGLCanvas glCanvas) {
 		super(glCanvas, VIEW_TYPE, VIEW_NAME);
@@ -95,11 +100,16 @@ public class GLLineUpView extends AMultiTablePerspectiveElementView {
 
 		RankTableUI root = new RankTableUI();
 		root.init(table, RankTableUIConfigs.DEFAULT, RowHeightLayouts.UNIFORM, RowHeightLayouts.FISH_EYE);
-		RankTableUIMouseKeyListener l = new RankTableUIMouseKeyListener(root.findBody());
-		this.canvas.addMouseListener(l);
-		this.canvas.addKeyListener(l);
+		this.keyListener = GLThreadListenerWrapper.wrap(new RankTableKeyListener(table, root.findBody()));
+		this.canvas.addKeyListener(eventListeners.register(keyListener));
 
 		getRootDecorator().setContent(root);
+	}
+
+	@Override
+	public void dispose(GLAutoDrawable drawable) {
+		canvas.removeKeyListener(keyListener);
+		super.dispose(drawable);
 	}
 
 	@Override
